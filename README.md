@@ -37,6 +37,7 @@ $validate = $hasher($database_hash);
 Some modules, have a extra parameters in order to hash the passwords, has number of iterations, a salt to ensure the security, or a list of algorithms to use
 
 | Module    | Algorithm | Salt  | Iterations | Length |
+| --------- |-----------|-------|------------|--------|
 | Password  |           |   X   |            |        |
 | Hash      |     X     |       |            |        |
 | Hmac      |           |       |            |        |
