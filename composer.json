@@ -1,5 +1,5 @@
 {
-    "name": "juanchosl/library",
+    "name": "juanchosl/password-hashing",
     "description": "Abstraction for some crypt and password hashing in order to unify the creation and validation implementing interfaces",
     "type": "library",
     "license": "MIT",
