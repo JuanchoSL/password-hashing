@@ -27,6 +27,7 @@
         "juanchosl/datamanipulation": "^1.0"
     },
     "require-dev": {
+        "doctrine/instantiator": "1.5.*",
         "phpunit/phpunit": "9.6.*",
         "phpstan/phpstan": "1.12.*"
     },
