@@ -6,7 +6,7 @@ trait OpensslGenerator
 {
 
     use StringGenerator;
-    protected function generate(string $plainpasswd, ?string $salt = null): string
+    protected function generate(#[\SensitiveParameter] string $plainpasswd, #[\SensitiveParameter] ?string $salt = null): string
     {
         return openssl_password_hash($salt ?? $this->getAlgo(), $plainpasswd);
     }

@@ -5,5 +5,5 @@ namespace JuanchoSL\PasswordHashing\Contracts;
 
 interface ValidationCapableInterface
 {
-    public function __invoke(string $hash): bool;
+    public function __invoke(#[\SensitiveParameter] string $hash): bool;
 }

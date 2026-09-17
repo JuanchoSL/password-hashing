@@ -9,6 +9,15 @@ This library provides an abstraction layer in order to hash and verify given cli
 ```bash
 composer require juanchosl/password-hashing
 ```
+## Available hashings
+
+- BCrypt, Argon2I, Argon2ID [Password hashing](https://www.php.net/manual/en/function.password-hash.php)
+- MD5, DES (standard and extended), Blowfish, SHA256, SHA512 [Crypt](https://www.php.net/manual/en/function.crypt.php)
+- Digest created with any *hash algorithm* included into [hash_algos()](https://www.php.net/manual/en/function.hash-algos.php) function: [Hash](https://www.php.net/manual/en/function.hash.php)
+- PBKDF2 derivation created with any *hash hmac algorithm* included into [hash_hmac_algos()](https://www.php.net/manual/en/function.hash-hmac-algos.php) function: [hash_pbkdf2](https://www.php.net/manual/en/function.hash-pbkdf2.php)
+- Sha1 (Apache Sha1), the apache implementation for his authentication module on [Basic authentication](https://httpd.apache.org/docs/trunk/es/misc/password_encryptions.html#basic) > BASE64 of SHA1 binary password digest, with a prepenned *{SHA}* string
+- APR1 (Apache MD5), an owned algorithm for his authentication module on [Basic authentication](https://httpd.apache.org/docs/trunk/es/misc/password_encryptions.html#basic) > always 1000 iterations over a random salt
+- Apache Digest MD5, the apache implementation for his authentication module on[Digest authentication](https://httpd.apache.org/docs/trunk/es/misc/password_encryptions.html#digest)
 
 ## How use it
 
@@ -25,23 +34,27 @@ $hash = (string) $hasher;
 
 ### Verify a given password
 
-When an user needs to login, we creates an instance with the given password after verify that the user exists and is enabled. Then only needs invoke the object with the prior saved hash in order to verify that it has been created with the same password, and returning a boolean indicating the verification.
+When an user needs to login, we creates an instance with the given password after verify that the user exists and is enabled. Then only needs to invoke the previously created object, with the prior saved hash extracted from database as parameter, in order to verify that it has been created with the same password, and returning a boolean indicating the verification result.
 
 ```php
+$database_hash = (new UserDatabase)->select("password")->where("username", $passed_username, '=')->hashed_password;
+
 $hasher = new ArgonID($sended_password);
-$validate = $hasher($database_hash);
+$validation_result = $hasher($database_hash);//true or false
 ```
 
 ### Extra parameters
 
 Some modules, have a extra parameters in order to hash the passwords, has number of iterations, a salt to ensure the security, or a list of algorithms to use
 
-| Module    | Algorithm | Salt  | Iterations | Length |
-| --------- |-----------|-------|------------|--------|
-| Password  |           |   X   |            |        |
-| Hash      |     X     |       |            |        |
-| Hmac      |           |       |            |        |
-| Crypt MD5 |           |   X   |            |        |
-| Crypt std |           |   X   |            |        |
-| Crypt     |           |   X   |     X      |        |
-| Apache APR|           |   X   |            |        |
+| Module     | Algorithm | Salt | Iterations | Length | Output |
+| :--------- | :-------: | :--: | :--------: | :----: | :----: |
+| Password   |           |  X   |            |        | BASE64 |
+| Hash       |     X     |      |            |        | HEXADC |
+| Hmac       |           |      |            |        | HEXADC |
+| Crypt MD5  |           |  X   |            |        | BASE64 |
+| Crypt std  |           |  X   |            |        | BASE64 |
+| Crypt      |           |  X   |     X      |        | BASE64 |
+| Apache APR |           |      |            |        | BASE64 |
+| Apache SHA |           |      |            |        | BASE64 |
+| Apache MD5 |           |      |            |        | HEXADC |

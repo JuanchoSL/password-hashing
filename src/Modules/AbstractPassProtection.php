@@ -7,17 +7,17 @@ use JuanchoSL\PasswordHashing\Contracts\ValidationCapableInterface;
 abstract class AbstractPassProtection implements ValidationCapableInterface
 {
 
-    protected string $password;
+    protected $password;
 
-    public function __construct(string $password)
+    public function __construct(#[\SensitiveParameter] string $password)
     {
         $this->password = $password;
     }
 
-    public function __invoke(string $hash): bool
+    public function __invoke(#[\SensitiveParameter] string $hash): bool
     {
         return $this->validate($this->password, $hash);
     }
 
-    abstract protected function validate(string $password, string $hash): bool;
+    abstract protected function validate(#[\SensitiveParameter] string $password, #[\SensitiveParameter] string $hash): bool;
 }
