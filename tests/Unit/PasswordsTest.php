@@ -39,5 +39,4 @@ class PasswordsTest extends TestCase
             $this->assertFalse($result);
         }
     }
-
 }

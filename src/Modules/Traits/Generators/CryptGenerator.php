@@ -6,7 +6,7 @@ trait CryptGenerator
 {
     use StringGenerator;
 
-    protected function generate(string $plainpasswd, ?string $salt = null): string
+    protected function generate(#[\SensitiveParameter] string $plainpasswd, #[\SensitiveParameter] ?string $salt = null): string
     {
         $salt ??= $this->getAlgo() . $this->getSalt();
         return crypt($plainpasswd, $salt);
