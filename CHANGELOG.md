@@ -1,4 +1,4 @@
-# Change Log {}
+# Change Log Password-Hashing
 
 ## [1.0.0] -
 
