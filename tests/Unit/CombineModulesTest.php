@@ -6,12 +6,21 @@ use JuanchoSL\PasswordHashing\Modules\Apache\ApacheHashBasicSha1;
 use JuanchoSL\PasswordHashing\Modules\Crypt\CryptBlowfish;
 use JuanchoSL\PasswordHashing\Modules\Hash\Digest;
 use JuanchoSL\PasswordHashing\Modules\PassHash\Blowfish;
+use JuanchoSL\PasswordHashing\Modules\PassHash\Argon2ID as PassArgon2ID;
+use JuanchoSL\PasswordHashing\Modules\Sodium\Argon2ID as SodiumArgon2ID;
 
 use PHPUnit\Framework\TestCase;
 
 class CombineModulesTest extends TestCase
 {
 
+    public function testArgon2CombineModules()
+    {
+        $sodium = new SodiumArgon2ID('password');
+        $pass_hash = new PassArgon2ID('password');
+        $this->assertTrue($pass_hash((string) $sodium));
+        $this->assertTrue($sodium((string) $pass_hash));
+    }
 
     public function testBlowfishCombineModules()
     {

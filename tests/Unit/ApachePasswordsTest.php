@@ -1,6 +1,6 @@
 <?php
 
-namespace JuanchoSL\PasswordHashing\Tests\Integration;
+namespace JuanchoSL\PasswordHashing\Tests\Unit;
 
 use JuanchoSL\PasswordHashing\Modules\Apache\ApacheHashDigestMd5;
 use JuanchoSL\PasswordHashing\Modules\Apache\ApacheHashBasicSha1;
