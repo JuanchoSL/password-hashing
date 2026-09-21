@@ -1,6 +1,6 @@
 <?php
 
-namespace JuanchoSL\PasswordHashing\Tests\Integration;
+namespace JuanchoSL\PasswordHashing\Tests\Unit;
 
 use JuanchoSL\PasswordHashing\Modules\Hash\Digest;
 use PHPUnit\Framework\TestCase;

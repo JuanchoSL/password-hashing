@@ -2,24 +2,21 @@
 
 namespace JuanchoSL\PasswordHashing\Tests\Unit;
 
-use JuanchoSL\PasswordHashing\Modules\PassHash\Argon2I;
-use JuanchoSL\PasswordHashing\Modules\PassHash\Argon2ID;
-use JuanchoSL\PasswordHashing\Modules\PassHash\Blowfish;
+use JuanchoSL\PasswordHashing\Modules\Sodium\Argon2ID;
+use JuanchoSL\PasswordHashing\Modules\Sodium\Salsa208Sha256;
 use PHPUnit\Framework\TestCase;
 
-class PasswordsTest extends TestCase
+class SodiumTest extends TestCase
 {
 
 
     public static function providerPassData(): array
     {
         return [
-            [Blowfish::class, 'password', 'password', true],
-            [Argon2I::class, 'password', 'password', true],
             [Argon2ID::class, 'password', 'password', true],
-            [Blowfish::class, 'passworda', 'password', false],
-            [Argon2I::class, 'passworda', 'password', false],
             [Argon2ID::class, 'passworda', 'password', false],
+            [Salsa208Sha256::class, 'password', 'password', true],
+            [Salsa208Sha256::class, 'passworda', 'password', false],
         ];
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace JuanchoSL\PasswordHashing\Tests\Integration;
+namespace JuanchoSL\PasswordHashing\Tests\Unit;
 
 use JuanchoSL\PasswordHashing\Modules\Crypt\CryptBlowfish;
 use JuanchoSL\PasswordHashing\Modules\Crypt\CryptExtendedDes;
@@ -46,12 +46,6 @@ class CryptPasswordsTest extends TestCase
         if ($desired) {
             $this->assertTrue($result);
         } else {
-            if ($result) {
-                echo (string) $hash . PHP_EOL;
-                echo (string) $container . PHP_EOL;
-                echo (string) $pass . PHP_EOL;
-                echo (string) $container($hash) . PHP_EOL;
-            }
             $this->assertFalse($result);
         }
     }
