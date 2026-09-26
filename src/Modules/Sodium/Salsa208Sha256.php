@@ -14,7 +14,7 @@ class Salsa208Sha256 extends AbstractPassProtection implements GenerationCapable
 
     protected function getAlgo()
     {
-        return '$7$';
+        return SODIUM_CRYPTO_PWHASH_SCRYPTSALSA208SHA256_STRPREFIX;//'$7$';
     }
 
     protected function generate(#[\SensitiveParameter] string $plainpasswd, #[\SensitiveParameter] ?string $salt = null): string

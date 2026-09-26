@@ -8,14 +8,14 @@ use JuanchoSL\PasswordHashing\Contracts\ValidationCapableInterface;
 use JuanchoSL\PasswordHashing\Modules\Traits\Generators\SodiumGenerator;
 use JuanchoSL\PasswordHashing\Modules\Traits\Validators\SodiumValidator;
 
-class Argon2ID extends AbstractPassProtection implements GenerationCapableInterface, ValidationCapableInterface
+class Argon2I extends AbstractPassProtection implements GenerationCapableInterface, ValidationCapableInterface
 {
 
     use SodiumValidator, SodiumGenerator;
 
     protected function getAlgo()
     {
-        return SODIUM_CRYPTO_PWHASH_ALG_ARGON2ID13;
+        return SODIUM_CRYPTO_PWHASH_ALG_ARGON2I13;
     }
 
 }
