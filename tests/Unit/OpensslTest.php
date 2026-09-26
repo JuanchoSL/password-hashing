@@ -2,12 +2,11 @@
 
 namespace JuanchoSL\PasswordHashing\Tests\Unit;
 
-use JuanchoSL\PasswordHashing\Modules\Sodium\Argon2I;
-use JuanchoSL\PasswordHashing\Modules\Sodium\Argon2ID;
-use JuanchoSL\PasswordHashing\Modules\Sodium\Salsa208Sha256;
+use JuanchoSL\PasswordHashing\Modules\Openssl\Argon2I;
+use JuanchoSL\PasswordHashing\Modules\Openssl\Argon2ID;
 use PHPUnit\Framework\TestCase;
 
-class SodiumTest extends TestCase
+class OpensslTest extends TestCase
 {
 
 
@@ -15,11 +14,9 @@ class SodiumTest extends TestCase
     {
         return [
             [Argon2I::class, 'password', 'password', true],
-            [Argon2I::class, 'passworda', 'password', false],
             [Argon2ID::class, 'password', 'password', true],
+            [Argon2I::class, 'passworda', 'password', false],
             [Argon2ID::class, 'passworda', 'password', false],
-            [Salsa208Sha256::class, 'password', 'password', true],
-            [Salsa208Sha256::class, 'passworda', 'password', false],
         ];
     }
 
@@ -29,6 +26,9 @@ class SodiumTest extends TestCase
      */
     public function testReadToken($container, $pass1, $pass2, $desired): void
     {
+        if(!function_exists('openssl_password_hash')){
+            $this->markTestSkipped();
+        }
         $container1 = new $container($pass1);
         $container2 = new $container($pass2);
         $hash = (string) $container1;

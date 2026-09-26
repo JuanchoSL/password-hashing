@@ -2,10 +2,10 @@
 
 namespace JuanchoSL\PasswordHashing\Modules\Traits\Validators;
 
-trait OpensslValidator
+trait SodiumValidator
 {
     protected function validate(#[\SensitiveParameter] string $plainpasswd, #[\SensitiveParameter] string $hash): bool
     {
-        return \openssl_password_verify($this->getAlgo(), $plainpasswd, $hash);
+        return sodium_crypto_pwhash_str_verify($hash, $plainpasswd);
     }
 }
