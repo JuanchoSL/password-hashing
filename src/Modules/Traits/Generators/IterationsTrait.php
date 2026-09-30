@@ -5,7 +5,7 @@ namespace JuanchoSL\PasswordHashing\Modules\Traits\Generators;
 trait IterationsTrait
 {
 
-    protected int $iterations;
+    protected ?int $iterations = null;
 
     public function setIterations(int $iterations): static
     {
@@ -13,8 +13,8 @@ trait IterationsTrait
         return $this;
     }
 
-    public function getIterations(int $default = 5000): int
+    public function getIterations(): int
     {
-        return $this->iterations ?? $default;
+        return $this->iterations ?? $this->getIterationsDefault();
     }
 }

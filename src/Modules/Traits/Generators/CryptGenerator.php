@@ -11,4 +11,9 @@ trait CryptGenerator
         $salt ??= $this->getAlgo() . $this->getSalt();
         return crypt($plainpasswd, $salt);
     }
+
+    protected function getIterationsDefault(): mixed
+    {
+        return 5000;
+    }
 }
