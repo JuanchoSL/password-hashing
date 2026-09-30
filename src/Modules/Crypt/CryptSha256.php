@@ -27,7 +27,7 @@ class CryptSha256 extends AbstractPassProtection implements GenerationCapableInt
 
     protected function getSalt()
     {
-        $iterations = (new NumbersManipulators($this->getIterations(5000)))
+        $iterations = (new NumbersManipulators($this->getIterations()))
             ->max(1000)
             ->min(999999999);
         return (new StringsManipulators("rounds=%d$%s$"))->format((string) $iterations, $this->salt ?? $this->createRandomString(16));

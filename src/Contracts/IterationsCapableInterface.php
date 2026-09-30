@@ -2,11 +2,19 @@
 
 namespace JuanchoSL\PasswordHashing\Contracts;
 
-
 interface IterationsCapableInterface
 {
 
+    /**
+     * Set the desired iterations in order to create a stronger hash
+     * @param int $iterations The number of iterations
+     * @return static The same object
+     */
     public function setIterations(int $iterations): static;
 
-    public function getIterations(int $default = 5000): int;
+    /**
+     * Retrieve the setted iterations or the default value for the instance
+     * @return int the value to use
+     */
+    public function getIterations(): int;
 }

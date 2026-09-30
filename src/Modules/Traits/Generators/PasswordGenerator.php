@@ -8,6 +8,6 @@ trait PasswordGenerator
     use StringGenerator;
     protected function generate(#[\SensitiveParameter] string $plainpasswd, #[\SensitiveParameter] ?string $salt = null): string
     {
-        return password_hash($plainpasswd, $salt ?? $this->getAlgo());
+        return password_hash($plainpasswd, $this->getAlgo(), $this->getOptions());
     }
 }

@@ -2,19 +2,23 @@
 
 namespace JuanchoSL\PasswordHashing\Modules\PassHash;
 
-use JuanchoSL\PasswordHashing\Modules\AbstractPassProtection;
+use JuanchoSL\PasswordHashing\Contracts\IterationsCapableInterface;
+use JuanchoSL\PasswordHashing\Contracts\MemoryCostCapableInterface;
 use JuanchoSL\PasswordHashing\Contracts\GenerationCapableInterface;
 use JuanchoSL\PasswordHashing\Contracts\ValidationCapableInterface;
+use JuanchoSL\PasswordHashing\Modules\Traits\Generators\IterationsTrait;
+use JuanchoSL\PasswordHashing\Modules\Traits\Generators\MemCostSetterTrait;
 use JuanchoSL\PasswordHashing\Modules\Traits\Generators\PasswordGenerator;
 use JuanchoSL\PasswordHashing\Modules\Traits\Validators\PasswordValidator;
 
-class Argon2I extends AbstractPassProtection implements GenerationCapableInterface, ValidationCapableInterface
+class Argon2I extends AbstractArgon2 implements GenerationCapableInterface, ValidationCapableInterface, MemoryCostCapableInterface, IterationsCapableInterface
 {
 
-    use PasswordGenerator, PasswordValidator;
+    use PasswordGenerator, PasswordValidator, MemCostSetterTrait, IterationsTrait;
 
     protected function getAlgo()
     {
         return PASSWORD_ARGON2I;
     }
+
 }
