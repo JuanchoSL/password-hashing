@@ -14,12 +14,12 @@ trait OpensslGenerator
 
     protected function getMemoryCostOptionDefault(): mixed
     {
-        return null;
+        return PASSWORD_ARGON2_DEFAULT_MEMORY_COST;
     }
 
     protected function getIterationsDefault(): mixed
     {
-        return null;
+        return PASSWORD_ARGON2_DEFAULT_TIME_COST;
     }
 
     protected function getMemoryCostOptionName(): string
