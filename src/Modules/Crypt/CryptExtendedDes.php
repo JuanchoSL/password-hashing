@@ -20,12 +20,28 @@ class CryptExtendedDes extends AbstractPassProtection implements GenerationCapab
 
     protected function getAlgo()
     {
-        return '_';
+        return '';
     }
 
     protected function getSalt()
     {
         $string = './0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+
+        if (!is_null($this->salt) && strlen($this->salt) > 4) {
+            $this->salt = str_replace('_', '', $this->salt);
+            if (is_null($this->iterations) && strlen($this->salt) >= 8) {
+                $val = 0;
+                $char = substr($this->salt, 0, 4);
+                $this->salt = substr($this->salt, 4);
+                foreach (str_split($char) as $index => $char) {
+                    $pos = strpos($string, $char);
+                    $val += $pos * (64 ** $index);
+                }
+                $this->setIterations($val);
+            }
+            $this->salt = substr($this->salt, 0, 4);
+        }
+
         $val = $this->getIterations();
         $char = '';
         foreach ([3, 2, 1, 0] as $value) {
@@ -34,15 +50,6 @@ class CryptExtendedDes extends AbstractPassProtection implements GenerationCapab
             $char .= $string[intval($pow)];
             $val -= $exp * intval($pow);
         }
-        return strrev($char) . $this->salt ?? $this->createRandomString(4) . '$';
-
-        //reverso
-        $char = 'zzzz';
-        $val = 0;
-        foreach (str_split($char) as $index => $char) {
-            $pos = strpos($string, $char);
-            $val += $pos * (64 ** $index);
-        }
-        echo $val;
+        return '_' . strrev($char) . $this->salt ?? $this->createRandomString(4) . '$';
     }
 }
