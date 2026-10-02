@@ -12,12 +12,12 @@ trait OpensslGenerator
         return \openssl_password_hash($salt ?? $this->getAlgo(), $plainpasswd, $this->getOptions());
     }
 
-    protected function getMemoryCostOptionDefault(): mixed
+    protected function getMemoryCostOptionDefault(): int
     {
         return PASSWORD_ARGON2_DEFAULT_MEMORY_COST;
     }
 
-    protected function getIterationsDefault(): mixed
+    protected function getIterationsDefault(): int
     {
         return PASSWORD_ARGON2_DEFAULT_TIME_COST;
     }
@@ -32,13 +32,17 @@ trait OpensslGenerator
         return 'time_cost';
     }
 
-    protected function getOptions(): mixed
+    
+    /**
+     * @return array<string, int>
+     */
+    protected function getOptions(): array
     {
         $opt = [];
-        if (!is_null($this->getIterations())) {
+        if (!is_null($this->iterations)) {
             $opt[$this->getIterationsOptionName()] = $this->getIterations();
         }
-        if (!is_null($this->getMemoryCost())) {
+        if (!is_null($this->memory_cost)) {
             $opt[$this->getMemoryCostOptionName()] = $this->getMemoryCost();
         }
         return $opt;

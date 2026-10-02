@@ -18,12 +18,12 @@ class Salsa208Sha256 extends AbstractPassProtection implements GenerationCapable
 
     use StringGenerator, IterationsTrait, MemCostSetterTrait, SodiumRehashingDetection, SodiumRehashingDetection;
 
-    protected function getAlgo()
+    protected function getAlgo(): string
     {
         return SODIUM_CRYPTO_PWHASH_SCRYPTSALSA208SHA256_STRPREFIX;//'$7$';
     }
 
-    protected function getIterationsDefault(): mixed
+    protected function getIterationsDefault(): int
     {
         return SODIUM_CRYPTO_PWHASH_SCRYPTSALSA208SHA256_OPSLIMIT_INTERACTIVE;
     }
@@ -35,7 +35,7 @@ class Salsa208Sha256 extends AbstractPassProtection implements GenerationCapable
 
     protected function generate(#[\SensitiveParameter] string $plainpasswd, #[\SensitiveParameter] ?string $salt = null): string
     {
-        return sodium_crypto_pwhash_scryptsalsa208sha256_str($plainpasswd, $this->getIterations(), $this->getMemoryCost());
+        return sodium_crypto_pwhash_scryptsalsa208sha256_str($plainpasswd, $this->getIterations(), $this->getMemoryCost() * 1024);
     }
 
     protected function validate(#[\SensitiveParameter] string $plainpasswd, #[\SensitiveParameter] string $hash): bool

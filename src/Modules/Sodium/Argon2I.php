@@ -24,9 +24,9 @@ class Argon2I extends AbstractPassProtection implements
 
     use SodiumValidator, SodiumGenerator, MemCostSetterTrait, IterationsTrait, SodiumRehashingDetection;
 
-    protected function getAlgo()
+    protected function getAlgo(): string
     {
-        return SODIUM_CRYPTO_PWHASH_ALG_ARGON2I13;
+        return (string) SODIUM_CRYPTO_PWHASH_ALG_ARGON2I13;
     }
 
 }

@@ -6,6 +6,6 @@ trait OpensslValidator
 {
     protected function validate(#[\SensitiveParameter] string $plainpasswd, #[\SensitiveParameter] string $hash): bool
     {
-        return \openssl_password_verify($this->getAlgo(), $plainpasswd, $hash);
+        return \openssl_password_verify(strval($this->getAlgo()), $plainpasswd, $hash);
     }
 }

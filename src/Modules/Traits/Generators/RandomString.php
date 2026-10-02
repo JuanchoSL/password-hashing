@@ -7,7 +7,7 @@ use JuanchoSL\DataManipulation\Manipulators\Strings\StringsManipulators;
 trait RandomString
 {
 
-    protected function createRandomString(int $length, string $chars = './0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz')
+    protected function createRandomString(int $length, string $chars = './0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'): string
     {
         $string = (string) (new StringsManipulators($chars))->shuffle()->shuffle();
         $max = strlen($string);

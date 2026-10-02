@@ -12,7 +12,7 @@ trait CryptGenerator
         return crypt($plainpasswd, $salt);
     }
 
-    protected function getIterationsDefault(): mixed
+    protected function getIterationsDefault(): int
     {
         return 5000;
     }

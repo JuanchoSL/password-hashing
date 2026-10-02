@@ -23,13 +23,14 @@ class HashHkdf extends AbstractPassProtection implements
     use HashValidator, SaltSetterTrait, LengthSetterTrait, StringGenerator, RandomString;
 
     protected string $algo = 'sha512';
+
     public function setAlgorithm(string $algo): static
     {
         $this->algo = $algo;
         return $this;
     }
 
-    protected function getAlgo()
+    protected function getAlgo(): string
     {
         return $this->algo;
     }

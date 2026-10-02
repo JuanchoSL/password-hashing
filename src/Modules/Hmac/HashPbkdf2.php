@@ -28,11 +28,12 @@ class HashPbkdf2 extends AbstractPassProtection implements LengthCapableInterfac
         return $this;
     }
 
-    protected function getAlgo()
+    protected function getAlgo(): string
     {
         return $this->algo;
     }
-    protected function getIterationsDefault(): mixed
+
+    protected function getIterationsDefault(): int
     {
         return 100000;
     }

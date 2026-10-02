@@ -16,12 +16,12 @@ class CryptMd5 extends AbstractPassProtection implements GenerationCapableInterf
 
     use CryptGenerator, HashValidator, SaltSetterTrait, RandomString;
 
-    protected function getAlgo()
+    protected function getAlgo(): string
     {
         return '$1$';
     }
 
-    protected function getSalt()
+    protected function getSalt(): string
     {
         return $this->salt ?? $this->createRandomString(12);
     }

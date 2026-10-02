@@ -13,25 +13,33 @@ abstract class AbstractArgon2 extends AbstractPassProtection implements Iteratio
 
     use PasswordRehashingDetection;
 
-    protected function getMemoryCostOptionDefault(): mixed
+    abstract protected function getAlgo(): string;
+
+    protected function getMemoryCostOptionDefault(): int
     {
         return PASSWORD_ARGON2_DEFAULT_MEMORY_COST;
     }
 
-    protected function getIterationsDefault(): mixed
+    protected function getIterationsDefault(): int
     {
         return PASSWORD_ARGON2_DEFAULT_TIME_COST;
     }
+
     protected function getMemoryCostOptionName(): string
     {
         return 'memory_cost';
     }
+
     protected function getIterationsOptionName(): string
     {
         return 'time_cost';
     }
 
-    protected function getOptions(): mixed
+    /**
+     * Summary of getOptions
+     * @return array<string, int>
+     */
+    protected function getOptions(): array
     {
         return [
             $this->getMemoryCostOptionName() => $this->getMemoryCost(),

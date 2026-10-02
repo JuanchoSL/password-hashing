@@ -18,12 +18,12 @@ class CryptBlowfish extends AbstractCrypt implements SaltCapableInterface, Itera
 
     use CryptGenerator, RandomString, IterationsTrait, SaltSetterTrait;
 
-    protected function getAlgo()
+    protected function getAlgo(): string
     {
         return '$2y$';
     }
 
-    protected function getSalt()
+    protected function getSalt(): string
     {
         return (string) (new NumbersManipulators($this->getIterations()))
             ->logarithmNatural(2)

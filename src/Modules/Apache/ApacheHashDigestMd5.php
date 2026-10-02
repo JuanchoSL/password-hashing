@@ -18,7 +18,7 @@ class ApacheHashDigestMd5 extends AbstractPassProtection implements GenerationCa
         parent::__construct($username . ":" . $realm . ":" . $password);
     }
 
-    protected function getAlgo()
+    protected function getAlgo(): string
     {
         return 'md5';
     }

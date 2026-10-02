@@ -16,7 +16,7 @@ class Argon2ID extends AbstractArgon2 implements GenerationCapableInterface, Val
 
     use PasswordGenerator, PasswordValidator, MemCostSetterTrait, IterationsTrait;
 
-    protected function getAlgo()
+    protected function getAlgo(): string
     {
         return PASSWORD_ARGON2ID;
     }

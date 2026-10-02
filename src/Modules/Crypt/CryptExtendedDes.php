@@ -18,12 +18,12 @@ class CryptExtendedDes extends AbstractPassProtection implements GenerationCapab
 
     use CryptGenerator, HashValidator, RandomString, IterationsTrait, SaltSetterTrait;
 
-    protected function getAlgo()
+    protected function getAlgo(): string
     {
         return '';
     }
 
-    protected function getSalt()
+    protected function getSalt(): string
     {
         $string = './0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 
@@ -41,7 +41,7 @@ class CryptExtendedDes extends AbstractPassProtection implements GenerationCapab
             }
             $this->salt = substr($this->salt, 0, 4);
         }
-
+        $this->salt ??= $this->createRandomString(4);
         $val = $this->getIterations();
         $char = '';
         foreach ([3, 2, 1, 0] as $value) {
@@ -50,6 +50,6 @@ class CryptExtendedDes extends AbstractPassProtection implements GenerationCapab
             $char .= $string[intval($pow)];
             $val -= $exp * intval($pow);
         }
-        return '_' . strrev($char) . $this->salt ?? $this->createRandomString(4) . '$';
+        return '_' . strrev($char) . $this->salt . '$';
     }
 }

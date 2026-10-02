@@ -20,16 +20,17 @@ class CryptSha256 extends AbstractPassProtection implements GenerationCapableInt
 
     use CryptGenerator, HashValidator, RandomString, IterationsTrait, SaltSetterTrait;
 
-    protected function getAlgo()
+    protected function getAlgo(): string
     {
         return '$5$';
     }
 
-    protected function getSalt()
+    protected function getSalt(): string
     {
         $iterations = (new NumbersManipulators($this->getIterations()))
             ->max(1000)
             ->min(999999999);
-        return (new StringsManipulators("rounds=%d$%s$"))->format((string) $iterations, $this->salt ?? $this->createRandomString(16));
+        return (string) (new StringsManipulators("rounds=%d$%s$"))
+            ->format((string) $iterations, $this->salt ?? $this->createRandomString(16));
     }
 }

@@ -17,12 +17,12 @@ class ApacheApr1BasicMd5 extends AbstractPassProtection implements GenerationCap
 
     use HashValidator, StringGenerator, RandomString, SaltSetterTrait;
 
-    protected function getAlgo()
+    protected function getAlgo(): string
     {
         return '$apr1$';
     }
 
-    protected function getSalt()
+    protected function getSalt(): string
     {
         return $this->salt ?? $this->createRandomString(8, "abcdefghijklmnopqrstuvwxyz0123456789");
     }
