@@ -71,23 +71,23 @@ $result = $selection($plain_password);
 
 ### Extra parameters
 
-Some modules, have a extra parameters in order to hash the passwords, has number of iterations, a salt to ensure the security, or a list of algorithms to use
+Some modules, have some extra parameters, in order to hash the passwords, as number of iterations, a salt to ensure the security, or a list of algorithms to use
 
-| Module     | Algorithm | Salt | Iterations | Mem cost KB | Length | Output |
-| :--------- | :-------: | :--: | :--------: | :---------: | :----: | :----: |
-| Pass ARG2  |           |      |     X      |      X      |        | BASE64 |
-| Pass BCRYP |           |  X   |            |             |        | BASE64 |
-| Hash       |     X     |      |            |             |        | HEXDEC |
-| Hmac Pbkdf |     X     |  X   |            |             |   X    | HEXDEC |
-| Hmac Hkdf  |     X     |  X   |            |             |   X    | HEXDEC |
-| Crypt MD5  |           |  X   |            |             |        | BASE64 |
-| Crypt std  |           |  X   |            |             |        | BASE64 |
-| Crypt      |           |  X   |     X      |             |        | BASE64 |
-| Apache APR |           |  X   |            |             |        | BASE64 |
-| Apache SHA |           |      |            |             |        | BASE64 |
-| Apache MD5 |           |      |            |             |        | HEXDEC |
-| Sodium     |           |      |     X      |      X      |        | BASE64 |
-| OpenSSL    |           |      |     X      |      X      |        | BASE64 |
+| Module     | Algorithm | Salt | Iterations | Mem cost KB | Length | Context | Output |
+| :--------- | :-------: | :--: | :--------: | :---------: | :----: | :-----: | :----: |
+| Pass ARG2  |           |      |     X      |      X      |        |         | BASE64 |
+| Pass BCRYP |           |  X   |            |             |        |         | BASE64 |
+| Hash       |     X     |      |            |             |        |         | HEXDEC |
+| Hmac Pbkdf |     X     |  X   |     X      |             |   X    |         | HEXDEC |
+| Hmac Hkdf  |     X     |  X   |            |             |   X    |    X    | HEXDEC |
+| Crypt MD5  |           |  X   |            |             |        |         | BASE64 |
+| Crypt std  |           |  X   |            |             |        |         | BASE64 |
+| Crypt      |           |  X   |     X      |             |        |         | BASE64 |
+| Apache APR |           |  X   |            |             |        |         | BASE64 |
+| Apache SHA |           |      |            |             |        |         | BASE64 |
+| Apache MD5 |           |      |            |             |        |         | HEXDEC |
+| Sodium     |           |      |     X      |      X      |        |         | BASE64 |
+| OpenSSL    |           |      |     X      |      X      |        |         | BASE64 |
 
 ### Compatibility
 
