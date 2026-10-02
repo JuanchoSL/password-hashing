@@ -11,12 +11,12 @@ trait SodiumGenerator
         return sodium_crypto_pwhash_str($plainpasswd, $this->getIterations(), $this->getMemoryCost());
     }
 
-    protected function getMemoryCostOptionDefault(): mixed
+    protected function getMemoryCostOptionDefault(): int
     {
         return SODIUM_CRYPTO_PWHASH_MEMLIMIT_MODERATE;
     }
 
-    protected function getIterationsDefault(): mixed
+    protected function getIterationsDefault(): int
     {
         return SODIUM_CRYPTO_PWHASH_OPSLIMIT_MODERATE;
     }

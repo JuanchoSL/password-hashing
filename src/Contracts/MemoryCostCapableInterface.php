@@ -7,7 +7,7 @@ interface MemoryCostCapableInterface
 
     /**
      * Set the max memory cost (in kB) in order to use for the hash calculation
-     * @param mixed $memory_cost_kb Max kB of memory available to use for the hash calculation
+     * @param ?int $memory_cost_kb Max kB of memory available to use for the hash calculation
      * @return static The same object
      */
     public function setMemoryCost(?int $memory_cost_kb = null): static;

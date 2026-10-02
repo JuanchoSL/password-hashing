@@ -20,12 +20,12 @@ class CryptSha512 extends AbstractPassProtection implements GenerationCapableInt
 
     use CryptGenerator, HashValidator, RandomString, IterationsTrait, SaltSetterTrait;
 
-    protected function getAlgo()
+    protected function getAlgo(): string
     {
         return '$6$';
     }
 
-    protected function getSalt()
+    protected function getSalt(): string
     {
         $iterations = (new NumbersManipulators($this->getIterations()))
             ->max(1000)

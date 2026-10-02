@@ -2,6 +2,7 @@
 
 namespace JuanchoSL\PasswordHashing\Modules\Hmac;
 
+use JuanchoSL\PasswordHashing\Contracts\ContextCapableInterface;
 use JuanchoSL\PasswordHashing\Modules\AbstractPassProtection;
 use JuanchoSL\PasswordHashing\Contracts\AlgorithmCapableInterface;
 use JuanchoSL\PasswordHashing\Contracts\GenerationCapableInterface;
@@ -17,19 +18,29 @@ class HashHkdf extends AbstractPassProtection implements
     LengthCapableInterface,
     SaltCapableInterface,
     AlgorithmCapableInterface,
-    GenerationCapableInterface
+    GenerationCapableInterface,
+    ContextCapableInterface
 {
 
     use HashValidator, SaltSetterTrait, LengthSetterTrait, StringGenerator, RandomString;
 
     protected string $algo = 'sha512';
+
+    protected string $context = '';
+
+    public function setContext(string $context): static
+    {
+        $this->context = $context;
+        return $this;
+    }
+
     public function setAlgorithm(string $algo): static
     {
         $this->algo = $algo;
         return $this;
     }
 
-    protected function getAlgo()
+    protected function getAlgo(): string
     {
         return $this->algo;
     }
@@ -39,6 +50,6 @@ class HashHkdf extends AbstractPassProtection implements
         $this->salt ??= $this->createRandomString(16);
         //$salt ??= $this->salt;
         $salt = $this->salt;
-        return hash_hkdf($this->getAlgo(), $plainpasswd, $this->length, '', $salt);
+        return hash_hkdf($this->getAlgo(), $plainpasswd, $this->length, $this->context, $salt);
     }
 }

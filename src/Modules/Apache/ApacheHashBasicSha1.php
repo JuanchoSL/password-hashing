@@ -13,13 +13,13 @@ class ApacheHashBasicSha1 extends AbstractPassProtection implements GenerationCa
 
     use StringGenerator, HashValidator;
 
-    protected function getAlgo()
+    protected function getAlgo(): string
     {
         return '{SHA}';
     }
 
-    protected function generate(): string
+    protected function generate(#[\SensitiveParameter] string $plainpasswd, #[\SensitiveParameter] ?string $salt = null): string
     {
-        return $this->getAlgo() . base64_encode(sha1($this->password, true));
+        return $this->getAlgo() . base64_encode(sha1($plainpasswd, true));
     }
 }

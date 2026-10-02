@@ -15,12 +15,15 @@ class Blowfish extends AbstractPassProtection implements GenerationCapableInterf
 
     use PasswordGenerator, PasswordValidator, SaltSetterTrait;
 
-    protected function getAlgo()
+    protected function getAlgo(): string
     {
         return PASSWORD_BCRYPT;
     }
 
-    protected function getOptions(): mixed
+    /**
+     * @return array<string, string>
+     */
+    protected function getOptions(): array
     {
         $opt = [];
         if (!is_null($this->salt)) {

@@ -17,7 +17,7 @@ class Argon2I extends AbstractPassProtection implements GenerationCapableInterfa
 
     use OpensslGenerator, OpensslValidator, IterationsTrait, MemCostSetterTrait;
 
-    protected function getAlgo()
+    protected function getAlgo(): string
     {
         return PASSWORD_ARGON2I;
     }

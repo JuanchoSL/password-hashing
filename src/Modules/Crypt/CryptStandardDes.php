@@ -16,12 +16,12 @@ class CryptStandardDes extends AbstractPassProtection implements GenerationCapab
 
     use CryptGenerator, HashValidator, RandomString, SaltSetterTrait;
 
-    protected function getAlgo()
+    protected function getAlgo(): string
     {
         return '';
     }
 
-    protected function getSalt()
+    protected function getSalt(): string
     {
         return $this->salt ?? $this->createRandomString(2);
     }

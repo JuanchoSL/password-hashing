@@ -15,7 +15,7 @@ class Digest extends AbstractPassProtection implements GenerationCapableInterfac
 
     use HashGenerator, HashValidator, AlgorithmSetterTrait;
 
-    protected function getAlgo()
+    protected function getAlgo(): string
     {
         return $this->algorithm;
     }

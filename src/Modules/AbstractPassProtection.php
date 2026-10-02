@@ -7,7 +7,7 @@ use JuanchoSL\PasswordHashing\Contracts\ValidationCapableInterface;
 abstract class AbstractPassProtection implements ValidationCapableInterface
 {
 
-    protected $password;
+    protected string $password;
 
     public function __construct(#[\SensitiveParameter] string $password)
     {
